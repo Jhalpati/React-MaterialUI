@@ -1,14 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Button from '@material-ui/core/Button';
+import Search from './search';
+import AppBar from '@material-ui/core/AppBar';
+import ToolBar from '@material-ui/core/ToolBar';
+import IconButton  from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
 
 function App() {
   return (
     <div className="App">
-      <Button>
-        Hello
-      </Button>
+      <AppBar>
+        {/* <ToolBar>
+          <IconButton>
+            <MenuIcon/>
+          </IconButton>
+        </ToolBar> */}
+      </AppBar>
+
+
+    <Search/>
     </div>
   );
 }
