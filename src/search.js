@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 
 function Search() {
     return(
-        <div>
+        <div className="App">
    <Button 
       endIcon={<SaveIcon/>} 
       startIcon={<SaveIcon/>} 
