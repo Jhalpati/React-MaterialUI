@@ -43,7 +43,6 @@ export default function Asynchronous() {
         setOptions(Object.keys(countries).map((key) => countries[key].item[0]));
       }
     })();
-
     return () => {
       active = false;
     };
@@ -59,7 +58,7 @@ export default function Asynchronous() {
     <div className={classes.root}>
     <Autocomplete
       id="asynchronous-demo"
-      style={{ width: 300 }}
+      style={{ width: 350, padding: 5 }}
       open={open}
       onOpen={() => {
         setOpen(true);
@@ -81,7 +80,7 @@ export default function Asynchronous() {
               <React.Fragment>
                 {loading ? <CircularProgress color="inherit" size={20} /> : null}
                 {params.InputProps.endAdornment}
-              </React.Fragment>
+                  </React.Fragment>
           
             ),
           }}
