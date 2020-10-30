@@ -34,13 +34,13 @@ export default function Asynchronous() {
     }
 
     (async () => {
-      const response = await fetch('https://country.register.gov.uk/records.json?page-size=5000');
+      const response = await fetch('https://local-authority-eng.register.gov.uk/records.json?page-size=5000');
       await sleep(1e3); // For demo purposes.
-      const countries = await response.json();
-      console.log(countries);
+      const counties = await response.json();
+      console.log(counties);
 
       if (active) {
-        setOptions(Object.keys(countries).map((key) => countries[key].item[0]));
+        setOptions(Object.keys(counties).map((key) => counties[key].item[0]));
       }
     })();
     return () => {
