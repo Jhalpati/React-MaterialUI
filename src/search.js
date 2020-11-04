@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper from './paper';
+
 
 function sleep(delay = 0) {
   return new Promise((resolve) => {
@@ -54,6 +56,11 @@ export default function Asynchronous() {
     }
   }, [open]);
 
+  function handleClick(e) {
+    e.preventDefault();
+    console.log('The link was clicked.');
+  }
+
   return (
     <div className={classes.root}>
     <Autocomplete
@@ -70,6 +77,8 @@ export default function Asynchronous() {
       getOptionLabel={(option) => option.name}
       options={options}
       loading={loading}
+      onClick={handleClick}
+
       renderInput={(params) => (
         <TextField
           {...params}          
@@ -81,6 +90,7 @@ export default function Asynchronous() {
                 {loading ? <CircularProgress color="inherit" size={20} /> : null}
                 {params.InputProps.endAdornment}
                   </React.Fragment>
+                  
           
             ),
           }}
@@ -88,5 +98,7 @@ export default function Asynchronous() {
       )}
     />
     </div>
+
+
   );
 }
