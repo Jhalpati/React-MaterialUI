@@ -36,78 +36,23 @@ export default function Asynchronous() {
   React.useEffect(() => {
     let active = true;
 
-    if (!loading) {
-      return undefined;
-    }
+  
 
     (async () => {
       const response = await fetch('https://local-authority-eng.register.gov.uk/records.json?page-size=5000');
       await sleep(1e3); // For demo purposes.
       const counties = await response.json();
+      console.log(counties);
 
-      if (active) {
-        setOptions(Object.keys(counties).map((key) => counties[key].item[0]));
-      }
     })();
-    return () => {
-      active = false;
-    };
+  
   }, [loading]);
 
-  React.useEffect(() => {
-    if (!open) {
-      setOptions([]);
-    }
-  }, [open]);
 
 
-
-  return (
-    <div className={classes.root}>
-    <Autocomplete
-      id="asynchronous-demo"
-      style={{ width: 350, padding: 5 }}
-      open={open}
-      onOpen={() => {
-        setOpen(true);
-      }}
-      onClose={() => {
-        setOpen(false);
-      }}
-      getOptionSelected={(option, value) => option.name === value.name}
-      getOptionLabel={(option) => option.name}
-      options={options}
-      loading={loading}
-      
-
-      renderInput={(params) => (
-        <TextField
-          {...params}          
-          variant="outlined"
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <React.Fragment>
-                {loading ? <CircularProgress color="inherit" size={30} /> : null}
-                {params.InputProps.endAdornment}
-                  </React.Fragment>
-                  
-                  
-                  
-                  
-          
-            ),
-          }}
-        />
-      )}
-    />
-    <div>
-    <Box component="span" visibility="visible" p={1} m={1} bgcolor="background.paper">
-      </Box>
-    </div>
-
-    </div>
-
+  return(
+    <div><p>Ello</p></div>
 
   );
+
 }
