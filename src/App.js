@@ -1,23 +1,25 @@
 import React from 'react';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 import './App.css';
-import Search from './search';
-import Nav from './nav';
-import Paper from './paper';
-import { Container } from '@material-ui/core';
-import Card from './card';
+
+const client = new ApolloClient({
+    uri: "https://countries.trevorblades.com/"
+
+});
+
+const App = () => (
+
+  <ApolloProvider client={client}>
+
+<div>
+  <p>Hello World</p>
+</div>
 
 
-function App() {
-  return (
-    <div className="App">
-      <Search/>
-      {/* <Nav/>
-      <Paper/> */}
-      {/* <Card/> */}
 
+  </ApolloProvider>
 
-    </div>
-  );
-}
+)
 
 export default App;
