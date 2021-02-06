@@ -1,28 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import axios from 'axios';
 
-export default class PersonList extends React.Component {
+export default class FetchRandomUser extends React.Component {
   state = {
-    persons: []
-  }
+    eventos: []
+  };
 
   componentDidMount() {
-    axios.get(`https://cors-anywhere.herokuapp.com/https://history.muffinlabs.com/date/1/22`)
-      .then(res => {
-        const persons = res.data.data.Events[0];
-        console.log(persons);
-        this.setState({ persons });
-      })
+    fetch('https://cors-anywhere.herokuapp.com/http://history.muffinlabs.com/date/12/14')
+    .then(res => res.json())
+    .then((data) => {
+      this.setState({ eventos: data.data.Events })
+      console.log(data.data.Events);
+    })
+    .catch(console.log)
   }
 
-  render() {
-    return (
-      <ul>
-        {/* { this.state.persons.map(person => <li>{person.name}</li>)} */}
-        <h1>Hello</h1>
+  render(){
+    return(
+      <div>
+      <h1>w</h1>
+      {this.state.eventos.map(event => 
+      <p key={event.html}>{event.year} - {event.text}</p>
 
-      </ul>
-    )
-  }
+
+      
+      
+      )}
+
+      </div>
+
+     
+    )}
 }
+
+  // https://cors-anywhere.herokuapp.com/http://history.muffinlabs.com/date/12/14

@@ -2,7 +2,7 @@ import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Nav from "./nav";
-import PersonList from "./history";
+import History from "./history";
 import "./App.css";
 
 const client = new ApolloClient({
@@ -11,10 +11,9 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
+
     <div>
-      <h2>Hello</h2>
-      {/* <Nav/> */}
-      <PersonList/>
+      <History/>
     </div>
   </ApolloProvider>
 );
