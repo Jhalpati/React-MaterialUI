@@ -1,29 +1,31 @@
 import React, {Component} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import Button from '@material-ui/core/Button';
+import SearchBar from "material-ui-search-bar";
 
-import axios from 'axios';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 
 export default class FetchRandomUser extends React.Component {
+
+  
   state = {
     eventos: [],
 
   };
 
-  //https://cors-anywhere.herokuapp.com/
-//   componentDidMount() {
-//     fetch('https://byabbe.se/on-this-day/12/14/events.json',
-//     {
-// }
-//     ) 
-//     .then(res => res.json())
-//     // .then((data) => {
-//     //   this.setState({ eventos: data.data.Events })
-//     //   console.log(data.data);
-//     // })
-//     console.log(res.json);
-//   }
-
 componentDidMount() {
+
   // GET request using fetch with error handling
   fetch('https://byabbe.se/on-this-day/12/14/events.json')
       .then(async response => {
@@ -48,32 +50,34 @@ componentDidMount() {
 
 
 
-  render(){
 
+  render(){
     return(
+      
       <div>
 
-<form>
-        <input
-      />
-        <button className="search-button" type="submit">
-          Search
-        </button>
-
-        {/* {
-        error && <div style={{color: `red`}}><h1>An error occurred, while fetching api</h1></div>
-        }  */}
-      </form>        
-      {this.state.eventos.map(event => 
-      <p key={event.html}>{event.year} - {event.text}
-      {/* <p>{todaysDate}</p> */}
-      </p>
-      )}
+<SearchBar
+      onChange={() => console.log('onChange')}
+      onRequestSearch={() => console.log('onRequestSearch')}
+      style={{
+        margin: '20px auto',
+        maxWidth: 800
+      }}
+    />
 
       </div>
 
-     
+
+
+
     )}
 }
 
-  // https://cors-anywhere.herokuapp.com/http://history.muffinlabs.com/date/12/14
+{/* <SearchBar
+onChange={() => console.log('onChange')}
+onRequestSearch={() => console.log('onRequestSearch')}
+style={{
+  margin: '0 auto',
+  maxWidth: 800
+}}
+/> */}
