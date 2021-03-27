@@ -1,7 +1,8 @@
 import React, { Component, useState, useEffect, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import SearchBar from "material-ui-search-bar";
-import { ContactSupportOutlined } from "@material-ui/icons";
+import TextField from "@material-ui/core/TextField";
+import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,19 +63,20 @@ function History() {
 
   return (
     <div>
-      <form>
-        <input
-          type="text"
-          value={search}
-          onChange={updateSearch}
-          // onSubmit={getSearch}
-          style={{
-            margin: "20px auto",
-            maxWidth: 800,
-          }}
-        />
-        <button type="submit" onClick={getSearch}/>
-      </form>
+      <TextField
+      label="Search input"
+      margin="normal"
+      variant="outlined"
+        value={search}
+        onChange={updateSearch}
+        style={{
+          margin: "20 auto",
+          maxWidth: 1000,
+        }}
+      /> 
+      <Button variant="contained" color="primary" onClick={getSearch}>
+        Search
+      </Button>
       <Fragment>
         {data.map((data) => (
           <p>{data.description}</p>
