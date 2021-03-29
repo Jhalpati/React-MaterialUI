@@ -10,14 +10,19 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  
 }));
 
 function History() {
+let newDate = new Date()
+let date = newDate.getDate();
+let month = newDate.getMonth() + 1;
+
   const [data, setItems] = useState([]);
   // search state
   const [search, setSearch] = useState("");
   // Default query state
-  const [query, setQuery] = useState("7/7");
+  const [query, setQuery] = useState(month+'/'+date);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -50,7 +55,6 @@ function History() {
 
   const updateSearch = (e) => {
     setSearch(e.target.value);
-    console.log(search);
   };
 
   // Function to
@@ -63,20 +67,26 @@ function History() {
 
   return (
     <div>
-      <TextField
+      {/* <TextField
       label="Search input"
-      margin="normal"
-      variant="outlined"
-        value={search}
+      margin="auto"
+       value={search}
         onChange={updateSearch}
-        style={{
-          margin: "20 auto",
-          maxWidth: 1000,
-        }}
+        // style={{
+        //   margin: "20 auto",
+        //   maxWidth: 1000,
+        // }}
       /> 
-      <Button variant="contained" color="primary" onClick={getSearch}>
+      <Button
+      style={{
+        margin: "auto",
+        maxWidth: 1000,
+      }}
+
+       variant="contained" color="primary" onClick={getSearch}>
         Search
-      </Button>
+        
+      </Button> */}
       <Fragment>
         {data.map((data) => (
           <p>{data.description}</p>
