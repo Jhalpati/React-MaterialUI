@@ -7,6 +7,14 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineDot from '@material-ui/lab/TimelineDot';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -107,16 +115,35 @@ function History() {
         //   </p>
         // ))}
 
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className={classes.heading}>{data.year}</Typography>
+        // <Accordion>
+        //   <AccordionSummary
+        //     expandIcon={<ExpandMoreIcon />}
+        //     aria-controls="panel1a-content"
+        //     id="panel1a-header"
+        //   >
+        //     <Typography key={i} className={classes.heading}>{data.year} - {data.wikipedia.title} </Typography>
           
-          </AccordionSummary>
-        </Accordion>
+        //   </AccordionSummary>
+        //   <AccordionDetails>
+        //   <Typography>
+        //     {data.description}
+        //   </Typography>
+        // </AccordionDetails>
+        // </Accordion>
+
+        <Timeline>
+      <TimelineItem>
+      <TimelineOppositeContent>
+            <Typography color="textSecondary">{data.description}</Typography>
+          </TimelineOppositeContent>
+        <TimelineSeparator>
+          <TimelineDot />
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>{data.year}</TimelineContent>
+      </TimelineItem>
+      </Timeline>
+        
         ))}
       </div>
     </div>
