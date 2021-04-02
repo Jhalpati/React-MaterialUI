@@ -7,14 +7,14 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
-
+import Timeline from "@material-ui/lab/Timeline";
+import TimelineItem from "@material-ui/lab/TimelineItem";
+import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
+import TimelineConnector from "@material-ui/lab/TimelineConnector";
+import TimelineContent from "@material-ui/lab/TimelineContent";
+import TimelineDot from "@material-ui/lab/TimelineDot";
+import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +84,7 @@ function History() {
   return (
     <div className={classes.root}>
       {/* Button and Search bar below */}
+      <br></br>
       {/* <TextField
       label="Search input"
       margin="auto"
@@ -104,46 +105,63 @@ function History() {
         Search
         
       </Button> */}
+
+      {/* Functions for error handling */}
+      {error && (
+         <div>
+         <CircularProgress  color="Secondary"/>
+       </div>
+      )}
+
+      {loading && (
+        <div>
+          <CircularProgress />
+        </div>
+      )}
       <br></br>
       <Typography variant="h4" align="center">
-        Events that happened on {date}/{month}
+        Events that happened on {query}
       </Typography>
       <div>
         {data.map((data, i) => (
-        //   <p>
-        //     Year {data.year} | {data.description}
-        //   </p>
-        // ))}
+          //   <p>
+          //     Year {data.year} | {data.description}
+          //   </p>
+          // ))}
 
-        // <Accordion>
-        //   <AccordionSummary
-        //     expandIcon={<ExpandMoreIcon />}
-        //     aria-controls="panel1a-content"
-        //     id="panel1a-header"
-        //   >
-        //     <Typography key={i} className={classes.heading}>{data.year} - {data.wikipedia.title} </Typography>
-          
-        //   </AccordionSummary>
-        //   <AccordionDetails>
-        //   <Typography>
-        //     {data.description}
-        //   </Typography>
-        // </AccordionDetails>
-        // </Accordion>
+          // <Accordion>
+          //   <AccordionSummary
+          //     expandIcon={<ExpandMoreIcon />}
+          //     aria-controls="panel1a-content"
+          //     id="panel1a-header"
+          //   >
+          //     <Typography key={i} className={classes.heading}>{data.year} - {data.wikipedia.title} </Typography>
 
-        <Timeline>
-      <TimelineItem>
-      <TimelineOppositeContent>
-            <Typography color="textSecondary">{data.description}</Typography>
-          </TimelineOppositeContent>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>{data.year}</TimelineContent>
-      </TimelineItem>
-      </Timeline>
-        
+          //   </AccordionSummary>
+          //   <AccordionDetails>
+          //   <Typography>
+          //     {data.description}
+          //   </Typography>
+          // </AccordionDetails>
+          // </Accordion>
+
+          <Timeline>
+            <TimelineItem>
+              <TimelineOppositeContent>
+                <Typography key={i} color="textSecondary">
+                  {data.description}
+                </Typography>
+                <a href={data.wikipedia[0].wikipedia} target="_blank">
+                  Read more...
+                </a>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent key={i}>Year {data.year}</TimelineContent>
+            </TimelineItem>
+          </Timeline>
         ))}
       </div>
     </div>
