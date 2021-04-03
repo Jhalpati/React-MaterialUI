@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: '25ch',
+  },
 }));
 
 function History() {
@@ -83,34 +88,44 @@ function History() {
 
   return (
     <div className={classes.root}>
+             <Typography align='center'>
+
       {/* Button and Search bar below */}
       <br></br>
-      {/* <TextField
-      label="Search input"
-      margin="auto"
-       value={search}
-        onChange={updateSearch}
-        // style={{
-        //   margin: "20 auto",
-        //   maxWidth: 1000,
-        // }}
-      /> 
-      <Button
-      style={{
-        margin: "auto",
-        maxWidth: 1000,
-      }}
+      <TextField
+        // label="Search input"
+        // style={{ margin: 8 }}
+        // className="classes.root.textField"
+        id="standard-full-width"
+        style={{ margin: 4 }}
+        placeholder="Enter a date"
+        helperText="Example: 07/07"
+        margin="normal"
+        style = {{width: 300}} //assign the width as your requirement
 
-       variant="contained" color="primary" onClick={getSearch}>
-        Search
+        InputLabelProps={{
+          shrink: true,
+        }}
+        value={search}
+        onChange={updateSearch}
         
-      </Button> */}
+      />
+
+      <Button
+        textAlign="center"
+        variant="contained"
+        color="primary"
+        onClick={getSearch}
+      >
+        Search
+      </Button>
+      </Typography>
 
       {/* Functions for error handling */}
       {error && (
-         <div>
-         <CircularProgress  color="Secondary"/>
-       </div>
+        <div>
+          <CircularProgress color="Secondary" />
+        </div>
       )}
 
       {loading && (
@@ -123,7 +138,7 @@ function History() {
         Events that happened on {query}
       </Typography>
       <div>
-        {data.map((data, i) => (
+        {data.map((data, i, index) => (
           //   <p>
           //     Year {data.year} | {data.description}
           //   </p>
@@ -148,10 +163,14 @@ function History() {
           <Timeline>
             <TimelineItem>
               <TimelineOppositeContent>
-                <Typography key={i} color="textSecondary">
+                <Typography key={data.description} color="textSecondary">
                   {data.description}
                 </Typography>
-                <a href={data.wikipedia[0].wikipedia} target="_blank">
+                <a
+                  key={data.year}
+                  href={data.wikipedia[0].wikipedia}
+                  target="_blank"
+                >
                   Read more...
                 </a>
               </TimelineOppositeContent>
@@ -159,7 +178,7 @@ function History() {
                 <TimelineDot />
                 <TimelineConnector />
               </TimelineSeparator>
-              <TimelineContent key={i}>Year {data.year}</TimelineContent>
+              <TimelineContent key={index}>Year {data.year}</TimelineContent>
             </TimelineItem>
           </Timeline>
         ))}
