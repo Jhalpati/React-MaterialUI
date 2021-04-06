@@ -26,7 +26,7 @@ export default function Nav() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit">
-            ThrowBack
+            ThrowBack Machine<span role="img" aria-label="robot">🤖</span>
           </Typography>
         </Toolbar>
       </AppBar>
