@@ -3,10 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import SearchBar from "material-ui-search-bar";
 import TextField from "@material-ui/core/TextField";
 import { Button, Typography } from "@material-ui/core";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Timeline from "@material-ui/lab/Timeline";
 import TimelineItem from "@material-ui/lab/TimelineItem";
 import TimelineSeparator from "@material-ui/lab/TimelineSeparator";
@@ -27,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: '25ch',
+    width: "25ch",
   },
 }));
 
@@ -67,7 +63,7 @@ function History() {
       const data = await response.json();
       // Sets response as data.airports
       setItems(data.events);
-      console.log(data.events);
+      console.log(response);
     } catch (error) {
       setError(true);
     }
@@ -87,79 +83,49 @@ function History() {
   };
 
   return (
-    <div className={classes.root}>
-             <Typography align='center'>
+    <div>
+      <Typography align="center" component="div">
+        {/* Button and Search bar below */}
+        <br></br>
+        <TextField
+          id="standard-full-width"
+          style={{ margin: 4 }}
+          placeholder="Enter a date"
+          helperText="Example: 12/25 (Month, Day)"
+          margin="normal"
+          style={{ width: 300 }} //assign the width as your requirement
+          InputLabelProps={{
+            shrink: true,
+          }}
+          value={search}
+          onChange={updateSearch}
+        />
 
-      {/* Button and Search bar below */}
-      <br></br>
-      <TextField
-        // label="Search input"
-        // style={{ margin: 8 }}
-        // className="classes.root.textField"
-        id="standard-full-width"
-        style={{ margin: 4 }}
-        placeholder="Enter a date"
-        helperText="Example: 07/07"
-        margin="normal"
-        style = {{width: 300}} //assign the width as your requirement
+        <Button variant="contained" color="primary" onClick={getSearch}>
+          Search
+        </Button>
 
-        InputLabelProps={{
-          shrink: true,
-        }}
-        value={search}
-        onChange={updateSearch}
-        
-      />
+        {/* Functions for error handling */}
+        {error && (
+          <div>
+            <CircularProgress color="Secondary" />
+            <Typography>An error occured, Please try again</Typography>
+          </div>
+        )}
 
-      <Button
-        textAlign="center"
-        variant="contained"
-        color="primary"
-        onClick={getSearch}
-      >
-        Search
-      </Button>
+        {loading && (
+          <div>
+            <CircularProgress />
+          </div>
+        )}
       </Typography>
 
-      {/* Functions for error handling */}
-      {error && (
-        <div>
-          <CircularProgress color="Secondary" />
-        </div>
-      )}
-
-      {loading && (
-        <div>
-          <CircularProgress />
-        </div>
-      )}
       <br></br>
       <Typography variant="h4" align="center">
-        Events that happened on {query}
+        Events occured on {query}
       </Typography>
       <div>
         {data.map((data, i, index) => (
-          //   <p>
-          //     Year {data.year} | {data.description}
-          //   </p>
-          // ))}
-
-          // <Accordion>
-          //   <AccordionSummary
-          //     expandIcon={<ExpandMoreIcon />}
-          //     aria-controls="panel1a-content"
-          //     id="panel1a-header"
-          //   >
-          //     <Typography key={i} className={classes.heading}>{data.year} - {data.wikipedia.title} </Typography>
-
-          //   </AccordionSummary>
-          //   <AccordionDetails>
-          //   <Typography>
-          //     {data.description}
-          //   </Typography>
-          // </AccordionDetails>
-          // </Accordion>
-
           <Timeline>
             <TimelineItem>
               <TimelineOppositeContent>
@@ -167,7 +133,7 @@ function History() {
                   {data.description}
                 </Typography>
                 <a
-                  key={data.year}
+                  // key={data.year}
                   href={data.wikipedia[0].wikipedia}
                   target="_blank"
                 >
@@ -178,7 +144,7 @@ function History() {
                 <TimelineDot />
                 <TimelineConnector />
               </TimelineSeparator>
-              <TimelineContent key={index}>Year {data.year}</TimelineContent>
+              <TimelineContent>Year {data.year}</TimelineContent>
             </TimelineItem>
           </Timeline>
         ))}
@@ -187,3 +153,30 @@ function History() {
   );
 }
 export default History;
+
+// import Accordion from "@material-ui/core/Accordion";
+// import AccordionSummary from "@material-ui/core/AccordionSummary";
+// import AccordionDetails from "@material-ui/core/AccordionDetails";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+
+//   <p>
+//     Year {data.year} | {data.description}
+//   </p>
+// ))}
+
+// <Accordion>
+//   <AccordionSummary
+//     expandIcon={<ExpandMoreIcon />}
+//     aria-controls="panel1a-content"
+//     id="panel1a-header"
+//   >
+//     <Typography key={i} className={classes.heading}>{data.year} - {data.wikipedia.title} </Typography>
+
+//   </AccordionSummary>
+//   <AccordionDetails>
+//   <Typography>
+//     {data.description}
+//   </Typography>
+// </AccordionDetails>
+// </Accordion>
