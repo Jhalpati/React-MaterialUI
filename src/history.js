@@ -87,9 +87,13 @@ function History() {
       <Typography align="center" component="div">
         {/* Button and Search bar below */}
         <br></br>
+        <form>
         <TextField
-          inputProps={{ pattern: "[a-z]" }}
-          id="standard-full-width"
+        // InputProps={{ pattern: "[^(0?[1-9]|[1][0-2])[0-9]+$]" }}
+        pattern="\d*"
+         maxLength="4"
+
+        id="standard-full-width"
           style={{ margin: 4 }}
           placeholder="Enter a date"
           helperText="Example: 12/25 (Month, Day)"
@@ -100,6 +104,7 @@ function History() {
           value={search}
           onChange={updateSearch}
         />
+        </form>
 
         <Button variant="contained" color="primary" onClick={getSearch}>
           Search
@@ -149,6 +154,7 @@ function History() {
               </TimelineItem>
             </Timeline>
           </React.Fragment>
+          
         ))}
       </div>
     </div>
