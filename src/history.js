@@ -47,14 +47,14 @@ function History() {
     const fetchItems = async () => {
       setLoading(true);
       setError(false);
-  
+
       try {
         const response = await fetch(
           // Proxy was used to make this API call
           //`https://cors-anywhere.herokuapp.com/https://api.flightstats.com/flex/delayindex/rest/v1/json/region/Asia?appId=${APP_ID}&appKey=${APP_KEY}&classification=5&score=3`
           `https://byabbe.se/on-this-day/${query}/events.json`
         );
-  
+
         // Response received in JSON format and  stored as const data
         const data = await response.json();
         // Sets response as data.airports
@@ -65,13 +65,19 @@ function History() {
       }
       setLoading(false);
     };
-  
+
     fetchItems();
   }, [query]);
 
-  
   const updateSearch = (e) => {
-    setSearch(e.target.value);
+    const re = /^(0?[1-9]|[1][0-2])/;
+    if (e.target.value === "" || re.test(e.target.value)) {
+      setSearch(e.target.value);
+    } else {
+      console.log("error occured");
+    }
+
+    // setSearch(e.target.value);
   };
 
   // Function to
@@ -88,22 +94,19 @@ function History() {
         {/* Button and Search bar below */}
         <br></br>
         <form>
-        <TextField
-        // InputProps={{ pattern: "[^(0?[1-9]|[1][0-2])[0-9]+$]" }}
-        pattern="\d*"
-         maxLength="4"
-
-        id="standard-full-width"
-          style={{ margin: 4 }}
-          placeholder="Enter a date"
-          helperText="Example: 12/25 (Month, Day)"
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          value={search}
-          onChange={updateSearch}
-        />
+          <TextField
+            // InputProps={{ pattern: "[^(0?[1-9]|[1][0-2])[0-9]+$]" }}
+            id="standard-full-width"
+            style={{ margin: 4 }}
+            placeholder="Enter a date"
+            helperText="Example: 12/25 (Month, Day)"
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={search}
+            onChange={updateSearch}
+          />
         </form>
 
         <Button variant="contained" color="primary" onClick={getSearch}>
@@ -154,7 +157,6 @@ function History() {
               </TimelineItem>
             </Timeline>
           </React.Fragment>
-          
         ))}
       </div>
     </div>
