@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { Button, Typography } from "@material-ui/core";
 import Timeline from "@material-ui/lab/Timeline";
@@ -9,25 +8,9 @@ import TimelineConnector from "@material-ui/lab/TimelineConnector";
 import TimelineContent from "@material-ui/lab/TimelineContent";
 import TimelineDot from "@material-ui/lab/TimelineDot";
 import TimelineOppositeContent from "@material-ui/lab/TimelineOppositeContent";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     width: "100%",
-//   },
-//   heading: {
-//     fontSize: theme.typography.pxToRem(15),
-//     fontWeight: theme.typography.fontWeightRegular,
-//   },
-//   textField: {
-//     marginLeft: theme.spacing(1),
-//     marginRight: theme.spacing(1),
-//     width: "25ch",
-//   },
-// }));
 
 function History() {
-  // const classes = useStyles();
 
   let newDate = new Date();
   let date = newDate.getDate();
@@ -59,7 +42,6 @@ function History() {
         const data = await response.json();
         // Sets response as data.airports
         setItems(data.events);
-        // console.log(response);
       } catch (error) {
         setError(true);
       }
@@ -115,29 +97,22 @@ function History() {
 
         {/* Functions for error handling */}
         {error && (
-          <div>
-            <CircularProgress color="Secondary" />
-            <Typography>An error occured, Please try again</Typography>
-          </div>
+          <Typography>Date format {query} is incorrect, please try again!</Typography>
         )}
 
-        {loading && (
-          <div>
-            <CircularProgress />
-          </div>
-        )}
       </Typography>
 
       <br></br>
+      <div>
       <Typography variant="h4" align="center">
         Events occured on {query}
       </Typography>
-      <div>
         {data.map((data, i, index) => (
           <React.Fragment key={i}>
             <Timeline>
               <TimelineItem>
                 <TimelineOppositeContent>
+          
                   <Typography key={data.description} color="textSecondary">
                     {data.description}
                   </Typography>
